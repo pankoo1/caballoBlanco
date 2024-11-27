@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
 
 const NewReservation = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [name, setName] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   
-  // Inicializa el hook useNavigate
+  // Inicializa useNavigate
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Reserva confirmada para ${name} el ${startDate.toLocaleString()} para ${numberOfPeople} personas.`);
     
-    // Redirigir a la página de selección de mesas
-    navigate('/select-table');
+    // Redirige a la página de selección de mesa
+    navigate('/select-table');  // Asegúrate de que la ruta sea '/select-table'
   };
 
   return (
@@ -126,17 +126,16 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
-    marginBottom: '30px',
-  },
-  submitButtonHover: {
-    backgroundColor: '#21a1f1',
+    marginBottom: '15px',
   },
   backLink: {
     textAlign: 'center',
     textDecoration: 'none',
     color: '#61dafb',
-    marginTop: '20px',
+    marginTop: '70px',
   },
 };
 
 export default NewReservation;
+
+
