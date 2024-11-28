@@ -137,5 +137,3 @@ const styles = {
 };
 
 export default NewReservation;
-
-

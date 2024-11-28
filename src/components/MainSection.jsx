@@ -1,142 +1,98 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 
-const NewReservation = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [name, setName] = useState('');
-  const [numberOfPeople, setNumberOfPeople] = useState(1);
-  
-  // Inicializa el hook useNavigate
+const MainSection = () => {
+  // Inicializa useNavigate
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Reserva confirmada para ${name} el ${startDate.toLocaleString()} para ${numberOfPeople} personas.`);
-    
-    // Redirigir a la página de selección de mesas
-    navigate('/select-table');
+  // Función para manejar la navegación
+  const handleNewReservationClick = () => {
+    navigate('/new-reservation'); // Redirige a la vista de nueva reserva
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Hacer Nueva Reserva</h1>
-      
-      <form onSubmit={handleSubmit} style={styles.form}>
-        {/* Campo Nombre */}
-        <div style={styles.inputGroup}>
-          <label htmlFor="name" style={styles.label}>Nombre:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={styles.input}
-            required
-          />
+    <section className="container" style={styles.container}>
+      {/* Contenedor de texto en el lado izquierdo */}
+      <div style={styles.textContainer}>
+        <h1 style={styles.title}>Straight to the Point Restaurant Booking System</h1>
+        <div style={styles.buttonContainer}>
+          <button 
+            style={styles.buttonPrimary} 
+            className="me-3"
+            onClick={handleNewReservationClick} // Llama a la función de navegación
+          >
+            New Reservation
+          </button>
+          <button style={styles.buttonPrimary}>
+            Search
+          </button>
         </div>
+      </div>
 
-        {/* Campo Número de Personas */}
-        <div style={styles.inputGroup}>
-          <label htmlFor="numberOfPeople" style={styles.label}>Número de Personas:</label>
-          <input
-            type="number"
-            id="numberOfPeople"
-            value={numberOfPeople}
-            onChange={(e) => setNumberOfPeople(e.target.value)}
-            style={styles.input}
-            min="1"
-            required
-          />
-        </div>
-
-        {/* Selector de Fecha y Hora */}
-        <div style={styles.inputGroup}>
-          <label htmlFor="reservationDate" style={styles.label}>Fecha y Hora:</label>
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-            timeCaption="Hora"
-            style={styles.datePicker}
-          />
-        </div>
-
-        {/* Botón de Enviar */}
-        <button type="submit" style={styles.submitButton}>Confirmar Reserva</button>
-      </form>
-
-      <Link to="/" style={styles.backLink}>Volver al inicio</Link>
-    </div>
+      {/* Contenedor de la imagen en el lado derecho */}
+      <div style={styles.imageContainer}>
+        <img
+          src="./images/Section.png" // Usa la ruta correcta para tu imagen
+          alt="Cheese board"
+          style={styles.image}
+        />
+      </div>
+    </section>
   );
 };
 
 const styles = {
   container: {
-    padding: '20px',
-    maxWidth: '600px',
-    margin: '60px auto',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '40px',
+    gap: '20px',
+    height: '80vh', // Ocupa toda la pantalla
+    boxSizing: 'border-box', // Incluye padding en el cálculo del tamaño
+  },
+  textContainer: {
+    flex: 1,
+    maxWidth: '50%',
   },
   title: {
-    textAlign: 'center',
-    fontSize: '28px',
+    fontSize: '36px',
+    fontWeight: 'bold',
     marginBottom: '20px',
-    color: '#333',
+    color: '#000', // Texto negro
   },
-  form: {
+  buttonContainer: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '15px',
+    gap: '10px',
+    marginTop: '20px',
   },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  label: {
-    fontSize: '16px',
-    color: '#333',
-  },
-  input: {
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-  },
-  datePicker: {
-    padding: '10px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    width: '100%',
-    maxWidth: '1000px',
-  },
-  submitButton: {
-    padding: '12px',
-    backgroundColor: '#61dafb',
+  buttonPrimary: {
+    padding: '10px 20px',
+    backgroundColor: '#000',
     color: '#fff',
-    fontSize: '16px',
     border: 'none',
     borderRadius: '5px',
+    fontSize: '16px',
     cursor: 'pointer',
-    transition: 'background-color 0.3s',
-    marginBottom: '30px',
   },
-  submitButtonHover: {
-    backgroundColor: '#21a1f1',
+  inputSearch: {
+    padding: '10px 20px',
+    border: '1px solid #000',
+    borderRadius: '5px',
+    fontSize: '16px',
+    flex: 1,
   },
-  backLink: {
-    textAlign: 'center',
-    textDecoration: 'none',
-    color: '#61dafb',
-    marginTop: '20px',
+  imageContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center', // Centra horizontalmente
+    alignItems: 'center', // Centra verticalmente
+  },
+  image: {
+    maxWidth: '100%',
+    borderRadius: '10px',
   },
 };
 
-export default NewReservation;
+export default MainSection;
+
